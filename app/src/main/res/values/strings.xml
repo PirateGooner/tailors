@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Tailor</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_enter_name_hint">Enter Username</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="login_button_sign_in">Sign In</string>
+    <string name="create_account">Create Account</string>
+    <string name="login_title">Login</string>
+</resources>
