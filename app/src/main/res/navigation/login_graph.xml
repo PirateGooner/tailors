@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_graph"
+    app:startDestination="@id/login_fragment">
+
+    <fragment
+        android:id="@+id/login_fragment"
+        android:name="com.project.android.tailor.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/login_fragment">
+        <action
+            android:id="@+id/login_fragment_to_create_account_fragment"
+            app:destination="@id/create_account_fragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
+
+        <action
+            android:id="@+id/login_fragment_to_designs_fragment"
+            app:destination="@id/designsFragment"
+            app:popUpTo="@id/login_fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/create_account_fragment"
+        android:name="com.project.android.tailor.CreateAccountFragment"
+        android:label="Create Account"
+        tools:layout="@layout/create_account_fragment">
+        <action
+            android:id="@+id/action_create_account_fragment_to_designs_fragment"
+            app:destination="@id/designsFragment"
+            app:popUpTo="@id/login_fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+</navigation>

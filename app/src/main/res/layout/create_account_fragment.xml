@@ -50,7 +50,8 @@
             android:id="@+id/editTxtPassword_createAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Password" />
+            android:inputType="textPassword"
+            android:hint="Enter Password (6 or more characters)" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -100,6 +101,25 @@
             android:text="Female" />
     </RadioGroup>
 
+    <TextView
+        android:id="@+id/txtViewRole_createAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/spinnerRole_createAccount"
+        app:layout_constraintTop_toBottomOf="@id/create_acc_gender_radioGroup"
+        android:text="Select Role"
+        />
+
+    <Spinner
+        android:id="@+id/spinnerRole_createAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/txtViewRole_createAccount"
+        app:layout_constraintTop_toBottomOf="@id/create_acc_gender_radioGroup"
+        android:layout_marginLeft="@dimen/keyline_4"
+        />
+
     <com.google.android.material.button.MaterialButton
         style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         android:id="@+id/btnCreateAcc_createAccPage"
@@ -114,7 +134,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/create_acc_gender_radioGroup"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerRole_createAccount"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

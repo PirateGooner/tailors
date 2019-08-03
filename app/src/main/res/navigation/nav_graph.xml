@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/designsFragment">
+
+    <action
+        android:id="@+id/action_global_login_graph"
+        app:destination="@id/login_graph"
+        app:popUpTo="@+id/designsFragment"
+        app:popUpToInclusive="true"
+        />
+<!--
+    <action
+        android:id="@+id/action_global_designs_fragment"
+        app:destination="@id/designsFragment"
+        app:popUpTo="@id/login_fragment"
+        app:popUpToInclusive="true" />
+        -->
+<!--
+    <action
+        android:id="@+id/create_account_fragment_to_designs_fragment"
+        app:destination="@id/designsFragment" />
+-->
+    <action
+        android:id="@+id/action_global_update_user_details"
+        app:destination="@id/update_user_details_fragment" />
+
+    <fragment
+        android:id="@+id/designsFragment"
+        android:name="com.project.android.tailor.DesignsFragment"
+        android:label="Designs"
+        tools:layout="@layout/fragment_designs">
+        <!--
+                <action
+                    android:id="@+id/designs_fragment_to_login_fragment"
+                    app:destination="@id/login_graph"
+                    app:popUpTo="@+id/designsFragment"
+                    app:popUpToInclusive="true"
+                    />
+        -->
+    </fragment>
+
+    <fragment
+        android:id="@+id/update_user_details_fragment"
+        android:name="com.project.android.tailor.UpdateUserDetailsFragment"
+        android:label="Update Details"
+        tools:layout="@layout/fragment_update_user_details">
+
+    </fragment>
+
+    <include app:graph="@navigation/login_graph" />
+
+<!--
+        <fragment
+            android:id="@+id/login_fragment1"
+            android:name="com.project.android.tailor.LoginFragment"
+            android:label="Login"
+            tools:layout="@layout/login_fragment" />
+-->
+
+</navigation>

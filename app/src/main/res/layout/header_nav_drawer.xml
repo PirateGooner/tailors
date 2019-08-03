@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:background="@color/colorAccent"
+    >
+
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/ic_content_cut_white_24dp"
+    android:layout_marginTop="30dp"
+    android:layout_marginLeft="@dimen/keyline_4"
+    />
+
+    <TextView
+        android:id="@+id/txtViewUsername_drawerHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/keyline_4"
+        android:layout_marginLeft="@dimen/keyline_4"
+        android:textColor="#FFFFFF"
+        />
+
+    <TextView
+        android:id="@+id/txtViewEmail_drawerHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/keyline_4"
+        android:layout_marginLeft="@dimen/keyline_4"
+        android:textColor="#FFFFFF"
+        />
+
+</LinearLayout>

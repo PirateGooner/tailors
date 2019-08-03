@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<group>
+    <item
+        android:id="@+id/action_global_update_user_details"
+        android:icon="@drawable/ic_person_holo_light"
+        android:title="Update Your Details"
+        />
+<!--
+    <item
+        android:id="@+id/action_global_login_graph"
+        android:icon="@drawable/ic_arrow_back"
+        android:title="Logout"
+        />
+        -->
+</group>
+</menu>
