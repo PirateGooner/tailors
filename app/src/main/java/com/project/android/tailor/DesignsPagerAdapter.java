@@ -21,7 +21,7 @@ public class DesignsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int i){
         switch(i){
             case 0:
-                return new TestFragment();
+                return new NewDesignsFragment();
             case 1:
                 return new TestFragment();
         }
@@ -31,7 +31,7 @@ public class DesignsPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position){
         switch(position){
             case 0:
-                return "Tab 1";
+                return "New Designs";
             case 1:
                 return "Tab 2";
             default:
