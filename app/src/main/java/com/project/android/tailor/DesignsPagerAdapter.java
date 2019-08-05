@@ -23,7 +23,7 @@ public class DesignsPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return new NewDesignsFragment();
             case 1:
-                return new TestFragment();
+                return new LikedDesignsFragment();
         }
         return null;
     }
@@ -33,7 +33,7 @@ public class DesignsPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return "New Designs";
             case 1:
-                return "Tab 2";
+                return "Liked Designs";
             default:
                 return null;
         }

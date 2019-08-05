@@ -1,6 +1,7 @@
 package com.project.android.tailor;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 
 public class DesignsRecyclerAdapter extends RecyclerView.Adapter<DesignsRecyclerAdapter.DesignCardsViewHolder>{
 
-    class DesignCardsViewHolder extends RecyclerView.ViewHolder{
+    class DesignCardsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public MaterialCardView cardView;
         public ImageView designImageView;
         public ImageView likesImageView;
@@ -36,6 +37,15 @@ public class DesignsRecyclerAdapter extends RecyclerView.Adapter<DesignsRecycler
             descriptionTxtView=itemView.findViewById(R.id.txtViewDescription_cardDesigns);
             likesTxtView=itemView.findViewById(R.id.txtViewLikes_cardDesigns);
             this.mAdapter=adapter;
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            int mPosition=getLayoutPosition();
+            if(!(dataList.isEmpty())){
+                designsViewModel.saveLike(dataList.get(mPosition));
+            }
         }
     }
 
@@ -65,7 +75,12 @@ public class DesignsRecyclerAdapter extends RecyclerView.Adapter<DesignsRecycler
                     .load(reference)
                     .into(holder.designImageView);
 
-            holder.likesImageView.setImageResource(R.drawable.ic_thumbs_up_holo_light);
+            if(designsViewModel.hasUserLikedDesign(design.getUsersWhoLiked())) {
+                holder.likesImageView.setImageResource(R.drawable.ic_thumbs_up_green);
+            }else{
+                holder.likesImageView.setImageResource(R.drawable.ic_thumbs_up_holo_light);
+            }
+
             holder.usernameTxtView.setText(design.getUploader());
             holder.descriptionTxtView.setText(design.getDescription());
             holder.likesTxtView.setText(Integer.toString(design.getNumberOfLikes()));

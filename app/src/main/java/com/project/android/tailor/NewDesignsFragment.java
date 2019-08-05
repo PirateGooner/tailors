@@ -27,6 +27,7 @@ public class NewDesignsFragment extends Fragment {
     private DesignsRecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private DesignsViewModel designsViewModel;
+    private Observer<QuerySnapshot> observer;
 
     public NewDesignsFragment() {
         // Required empty public constructor
@@ -41,7 +42,9 @@ public class NewDesignsFragment extends Fragment {
     }
 
     public void onViewCreated(final View view, final Bundle savedInstanceState){
-        designsViewModel= ViewModelProviders.of(this).get(DesignsViewModel.class);
+
+
+        designsViewModel= ViewModelProviders.of(requireActivity()).get(DesignsViewModel.class);
 
         recyclerView=requireActivity().findViewById(R.id.recyclerView_newDesigns);
 
@@ -51,52 +54,60 @@ public class NewDesignsFragment extends Fragment {
         mAdapter=new DesignsRecyclerAdapter(requireActivity(),null,designsViewModel);
         recyclerView.setAdapter(mAdapter);
 
-
-        designsViewModel.setData();
-        designsViewModel.allDesignsSnapshot.observe(getViewLifecycleOwner(),new Observer<QuerySnapshot> (){
+        observer=new Observer<QuerySnapshot> (){
             public void onChanged(QuerySnapshot snapshot){
+                   // Log.d("MyActivity","On changed called");
+                    if(snapshot!=null) {
+                        for (DocumentChange dc : snapshot.getDocumentChanges()) {
+                            int position = 0;
+                            switch (dc.getType()) {
 
-                for(DocumentChange dc: snapshot.getDocumentChanges()){
-                    int position=0;
-                    switch(dc.getType()){
+                                case ADDED:
 
-                        case ADDED:
-                                mAdapter.dataList.add(0, dc.getDocument().toObject(DesignsModel.class));
-                                mAdapter.notifyItemInserted(0);
-                                break;
+                                    mAdapter.dataList.add(0, dc.getDocument().toObject(DesignsModel.class));
+                                    mAdapter.notifyItemInserted(0);
+                                    break;
 
 
-                        case MODIFIED:
-                            if(!(mAdapter.dataList.isEmpty())){
-                                for(DesignsModel model:mAdapter.dataList){
-                                    if(model.getDesignID()==dc.getDocument().toObject(DesignsModel.class).getDesignID()){
-                                        position=mAdapter.dataList.indexOf(model);
-                                        mAdapter.dataList.set(position,dc.getDocument().toObject(DesignsModel.class));
-                                        mAdapter.notifyItemChanged(position);
-                                        break;
+                                case MODIFIED:
+                                    if (!(mAdapter.dataList.isEmpty())) {
+                                        for (DesignsModel model : mAdapter.dataList) {
+                                            if (model.getDesignID() == dc.getDocument().toObject(DesignsModel.class).getDesignID()) {
+                                                position = mAdapter.dataList.indexOf(model);
+                                                mAdapter.dataList.set(position, dc.getDocument().toObject(DesignsModel.class));
+                                                mAdapter.notifyItemChanged(position);
+                                                break;
+                                            }
+                                        }
                                     }
-                                }
-                            }
-                            break;
+                                    break;
 
-                        case REMOVED:
-                            if(!(mAdapter.dataList.isEmpty())){
-                                for(DesignsModel model:mAdapter.dataList){
-                                    if(model.getDesignID()==dc.getDocument().toObject(DesignsModel.class).getDesignID()){
-                                        position=mAdapter.dataList.indexOf(model);
-                                        mAdapter.dataList.remove(position);
-                                        mAdapter.notifyItemRemoved(position);
-                                        break;
+                                case REMOVED:
+                                    if (!(mAdapter.dataList.isEmpty())) {
+                                        for (DesignsModel model : mAdapter.dataList) {
+                                            if (model.getDesignID() == dc.getDocument().toObject(DesignsModel.class).getDesignID()) {
+                                                position = mAdapter.dataList.indexOf(model);
+                                                mAdapter.dataList.remove(position);
+                                                mAdapter.notifyItemRemoved(position);
+                                                break;
+                                            }
+                                        }
                                     }
-                                }
-                            }
-                            break;
+                                    break;
 
+                            }
+                        }
                     }
-                }
             }
-        });
+        };
+        designsViewModel.setData();
+        designsViewModel.allDesignsSnapshot.observe(getViewLifecycleOwner(),observer);
+    }
 
+    public void onPause(){
+        super.onPause();
+        designsViewModel.allDesignsSnapshot.removeObserver(observer);
+        designsViewModel.setNull();
     }
 
 }
